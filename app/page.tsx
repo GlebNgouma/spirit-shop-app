@@ -1,7 +1,14 @@
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
 import { fetchPortions } from "@/lib/github";
+import { PotionType } from "@/types/github";
 
 export default async function Home() {
-  const data = await fetchPortions();
+  const potions = await fetchPortions();
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="max-w-3xl mx-auto text-center mb-12">
@@ -16,7 +23,26 @@ export default async function Home() {
           tools
         </p>
       </div>
-      {JSON.stringify(data, null, 2)}
+      <div className="mt-8">
+        {potions.map(
+          (
+            { full_name, name, description, topics }: PotionType,
+            index: number
+          ) => (
+            <Card className="" key={`${full_name}-${index}`}>
+              <CardHeader>{name}</CardHeader>
+              <CardContent>{description}</CardContent>
+              <CardFooter>
+                <div className="flex items-center gap-2">
+                  {topics.map((topic, index) => (
+                    <span key={index}>{topic}</span>
+                  ))}
+                </div>
+              </CardFooter>
+            </Card>
+          )
+        )}
+      </div>
     </main>
   );
 }

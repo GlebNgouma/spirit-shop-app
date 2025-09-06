@@ -15,7 +15,7 @@ const transformRepoToPortion = (repo: GithubRepo, index: number) => {
     ...repo,
     topics: repo.topics.slice(0, 3),
     potionEffect: POTION_EFFECTS[index % POTION_EFFECTS.length],
-    magicalType: MAGICAL_TYPES[index % POTION_EFFECTS.length],
+    magicalType: MAGICAL_TYPES[index % MAGICAL_TYPES.length].id,
   };
 };
 
@@ -30,7 +30,7 @@ export async function fetchPortions() {
     }),
   };
   try {
-    const response = await fetch(url, { headers });
+    const response = await fetch(url, { headers, cache: "force-cache" });
     if (!response.ok) {
       throw new Error(`Echec de recuperation des portions`);
     }

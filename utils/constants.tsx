@@ -1,7 +1,7 @@
 import { FlameIcon, SnowflakeIcon, SparklesIcon, ZapIcon } from "lucide-react";
 import { ReactNode } from "react";
 
-type MagicalType = {
+export type MagicalType = {
   id: string;
   value: string;
   label: string;

@@ -1,3 +1,5 @@
+import { MagicalType } from "@/utils/constants";
+
 export type GithubRepo = {
   id: number;
   name: string;
@@ -13,3 +15,8 @@ export type GithubRepo = {
   language: string;
   updated_at: string;
 };
+
+export interface PotionType extends GithubRepo {
+  potionEffect: string;
+  magicalType: MagicalType;
+}
