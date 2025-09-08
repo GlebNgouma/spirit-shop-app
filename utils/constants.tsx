@@ -1,14 +1,8 @@
 import { FlameIcon, SnowflakeIcon, SparklesIcon, ZapIcon } from "lucide-react";
-import { ReactNode } from "react";
 
-export type MagicalType = {
-  id: string;
-  value: string;
-  label: string;
-  icon: ReactNode;
-};
+export type MagicalType = "fire" | "ice" | "electric" | "all";
 
-export const MAGICAL_TYPES: MagicalType[] = [
+export const MAGICAL_TYPES = [
   {
     id: "fire",
     value: "🔥",
@@ -34,3 +28,12 @@ export const MAGICAL_TYPES: MagicalType[] = [
     icon: <SparklesIcon className="text-magic-purple" />,
   },
 ];
+
+export const formatNumber = (num: number): string => {
+  if (num >= 1000000) {
+    return `${(num / 1000000).toFixed(1)}M`;
+  } else if (num >= 1000) {
+    return `${(num / 1000).toFixed(0)}K`;
+  }
+  return num.toString();
+};

@@ -1,11 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import PotionGrid from "@/components/potions/potion-grid";
 import { fetchPortions } from "@/lib/github";
-import { PotionType } from "@/types/github";
 
 export default async function Home() {
   const potions = await fetchPortions();
@@ -24,24 +18,7 @@ export default async function Home() {
         </p>
       </div>
       <div className="mt-8">
-        {potions.map(
-          (
-            { full_name, name, description, topics }: PotionType,
-            index: number
-          ) => (
-            <Card className="" key={`${full_name}-${index}`}>
-              <CardHeader>{name}</CardHeader>
-              <CardContent>{description}</CardContent>
-              <CardFooter>
-                <div className="flex items-center gap-2">
-                  {topics.map((topic, index) => (
-                    <span key={index}>{topic}</span>
-                  ))}
-                </div>
-              </CardFooter>
-            </Card>
-          )
-        )}
+        <PotionGrid potions={potions} />
       </div>
     </main>
   );
