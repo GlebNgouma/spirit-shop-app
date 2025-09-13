@@ -1,8 +1,8 @@
 import PotionGrid from "@/components/potions/potion-grid";
-import { fetchPortions } from "@/lib/github";
+import { fetchPotions } from "@/lib/github";
 
 export default async function Home() {
-  const potions = await fetchPortions();
+  const potions = await fetchPotions();
   return (
     <main className="container mx-auto px-4 py-8">
       <div className="max-w-3xl mx-auto text-center mb-12">

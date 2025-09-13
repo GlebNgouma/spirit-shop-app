@@ -19,7 +19,7 @@ const transformRepoToPortion = (repo: GithubRepo, index: number) => {
   };
 };
 
-export async function fetchPortions() {
+export async function fetchPotions() {
   const url = `${GITHUB_API_URL}/search/repositories?q=topic:javascript+stars:>5000&sort=stars&order=desc`;
   const githubToken = process.env.GITHUB_TOKEN;
 
@@ -39,6 +39,41 @@ export async function fetchPortions() {
     return data.items.map((repo: GithubRepo, index: number) =>
       transformRepoToPortion(repo, index)
     );
+  } catch (error) {
+    console.error(
+      "Echec de recuperation des portions",
+      (error as Error).message
+    );
+    return [];
+  }
+}
+
+//---------------------------
+//Obtenir une potion
+//---------------------------
+export async function fetchPotion(owner: string, repo: string) {
+  const url = `${GITHUB_API_URL}/repos/${owner}/${repo}`;
+  const githubToken = process.env.GITHUB_TOKEN;
+
+  const headers = {
+    Accept: "application/vnd.github+json",
+    ...(githubToken && {
+      Authorization: `Bearer ${githubToken}`,
+    }),
+  };
+  try {
+    const response = await fetch(url, {
+      headers,
+      cache: "force-cache",
+      next: { revalidate: 3600 }, //chaque 1h
+    });
+    if (!response.ok) {
+      throw new Error(`Echec de recuperation des portions`);
+    }
+    const data = await response.json();
+    console.log("Fetching data", { data });
+
+    return transformRepoToPortion(data, 0);
   } catch (error) {
     console.error(
       "Echec de recuperation des portions",
