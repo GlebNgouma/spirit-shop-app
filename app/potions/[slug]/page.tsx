@@ -1,3 +1,4 @@
+import PotionInfo from "@/components/potions/potion-info";
 import { fetchPotion } from "@/lib/github";
 import { notFound } from "next/navigation";
 
@@ -27,5 +28,5 @@ export default async function PotionPage({
     notFound();
   }
   const potion = await fetchPotion(owner, repo);
-  return <div>my post: {JSON.stringify(potion)}</div>;
+  return <PotionInfo potion={potion} />;
 }

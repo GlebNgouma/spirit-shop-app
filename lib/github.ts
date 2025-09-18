@@ -71,7 +71,7 @@ export async function fetchPotion(owner: string, repo: string) {
       throw new Error(`Echec de recuperation des portions`);
     }
     const data = await response.json();
-    console.log("Fetching data", { data });
+    console.log("Fetching data", { owner, repo });
 
     return transformRepoToPortion(data, 0);
   } catch (error) {
