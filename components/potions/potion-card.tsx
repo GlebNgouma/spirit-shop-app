@@ -1,11 +1,8 @@
-import Image from "next/image";
-import { Card, CardContent, CardHeader } from "../ui/card";
-import { getMagicalTypeIcon } from "@/utils";
-import { Badge } from "../ui/badge";
 import { PotionType } from "@/types/github";
-import { PackageIcon, StarIcon } from "lucide-react";
-import { formatNumber } from "@/utils/constants";
+import { getMagicalTypeIcon } from "@/utils";
 import Link from "next/link";
+import { Badge } from "../ui/badge";
+import { Card, CardContent, CardHeader } from "../ui/card";
 import { PotionHeader, PotionStats } from "./poion-common";
 
 export default function PotionCard({
